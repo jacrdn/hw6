@@ -6,6 +6,7 @@ defmodule Hangman.Game do
     %{
       secret: random_secret(),
       guesses: MapSet.new(),
+      name: "",
     }
   end
 

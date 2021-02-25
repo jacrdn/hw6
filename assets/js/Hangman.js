@@ -141,7 +141,6 @@ function Hangman() {
   // render function,
   // should be pure except setState
   const [state, setState] = useState({
-    name: "",
     word: "",
     guesses: [],
   });

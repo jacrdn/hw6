@@ -19,6 +19,16 @@ defmodule HangmanWeb.GameChannel do
     end
   end
 
+  #def join("room:lobby", payload, socket) do
+  #   {:ok, socket}
+  # end
+
+
+  # def join("room:lobby", _, socket) do
+  #   send self(), :after_join
+  #   {:ok, socket}
+  # end
+
   @impl true
   def handle_in("login", %{"name" => user}, socket) do
     socket = assign(socket, :user, user)
@@ -62,4 +72,5 @@ defmodule HangmanWeb.GameChannel do
   defp authorized?(_payload) do
     true
   end
+
 end

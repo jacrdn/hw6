@@ -1,20 +1,22 @@
 import {Socket} from "phoenix";
 
-let socket = new Socket(
-  "/socket",
-  {params: {token: ""}}
-);
-socket.connect();
-
 let state = {
   word: "______",
   guesses: [],
-  name: ""
+  name: "",
 };
+
+let socket = new Socket(
+  "/socket",
+  {params: {token: state.name}}
+);
+socket.connect();
+
+// state.name
 
 // console.log("name-1:");
 console.log(state.name);
-let channel = socket.channel("game:1", {}); // name goes here FIXME THIS IS THE PROBLEM
+let channel = socket.channel("game:2", {}); // name goes here FIXME THIS IS THE PROBLEM
 
 // console.log("name-2:");
 // console.log(state.name);
@@ -39,7 +41,6 @@ export function ch_join(cb) {
 
 export function ch_login(name) {
   // channel = socket.channel("game:" + name, {}); // name goes here FIXME
-  console.log("channel"  + name);
   channel.push("login", {name: name})
          .receive("ok", state_update)
          .receive("error", resp => {
@@ -69,5 +70,9 @@ channel.join()
        .receive("error", resp => {
          console.log("Unable to join", resp)
        });
+
+
+
+
 
 channel.on("view", state_update);
